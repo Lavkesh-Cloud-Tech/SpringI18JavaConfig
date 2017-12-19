@@ -1,5 +1,8 @@
 package com.lavkesh.registration.validator;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -37,6 +40,27 @@ public class RegisterUserValidator implements Validator {
 			errors.rejectValue("confirmPassword", "NotEmpty.confirmPassword");
 		} else if(password.length() > 0 && confirmPassword.length() > 0 && !password.equals(confirmPassword)) {
 			errors.rejectValue("confirmPassword", "error.register.confirmPasswordNotEqual");
-		}		
+		}
+		
+		
+		Date dob = registerUser.getDob();
+		if(dob != null) {
+			Date currentDate = getCurrentDate();
+			
+			boolean currentOrFutureDate = dob.compareTo(currentDate) >= 0;
+			if(currentOrFutureDate) {
+				errors.rejectValue("dob", "future.dob");
+			}
+		}
+		
+	}
+	
+	private Date getCurrentDate() {
+		Calendar c1 = Calendar.getInstance();
+		c1.set(Calendar.HOUR, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
+		return c1.getTime();
 	}
 }

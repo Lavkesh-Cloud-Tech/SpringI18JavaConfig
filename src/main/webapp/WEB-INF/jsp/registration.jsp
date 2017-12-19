@@ -33,6 +33,23 @@
 		padding-right: 20px;
 	}
 	
+	.button {
+	    background-color: yellow; /* black */
+	    border: 1px solid black;
+	    color: red;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    font-weight: bold;
+	}
+	
+	.button:hover {
+		background-color: lightgray;
+		color: blue;
+	}
+	
 	.error {
 		color: red;
 	}
@@ -52,7 +69,7 @@
 			</div>
 			
 			<div>
-				<form:form method="POST" action="${contextPath}/newuser" modelAttribute="registerUser">
+				<form:form method="POST" action="${contextPath}/newuser" modelAttribute="registerUser" novalidate="novalidate">
 					<table cellpadding="10">
 						<tr>
 							<td>
@@ -213,13 +230,13 @@
 						
 						<tr>							
 							<td>
-								<form:button type="submit">
+								<form:button type="submit" class="button">
 									<spring:message code="label.registration.submit"></spring:message>
 								</form:button>
 							</td>
 							
 							<td>
-								<form:button type="button">
+								<form:button type="button" class="button" onclick="goToHomePage()">
 									<spring:message code="label.registration.cancel"></spring:message>
 								</form:button>
 							</td>	
@@ -230,5 +247,13 @@
 		
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	
+		function goToHomePage() {
+			window.location.href = '${contextPath}';
+		};
+	
+	</script>
 </body>
 </html>
