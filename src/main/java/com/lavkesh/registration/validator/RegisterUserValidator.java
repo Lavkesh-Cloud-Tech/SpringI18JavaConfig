@@ -55,7 +55,7 @@ public class RegisterUserValidator implements Validator {
 				
 				boolean currentOrFutureDate = dobDate.compareTo(currentDate) >= 0;
 				if(currentOrFutureDate) {
-					errors.rejectValue("dob", "future.dob");
+					errors.rejectValue("dob", "past.dob");
 				}
 			}
 		}

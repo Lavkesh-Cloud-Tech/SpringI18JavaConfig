@@ -69,7 +69,7 @@
 			</div>
 			
 			<div>
-				<form:form method="POST" action="${contextPath}/newuser" modelAttribute="registerUser" novalidate="novalidate">
+				<form:form method="POST" action="${contextPath}/" modelAttribute="registerUser" novalidate="novalidate">
 					<table cellpadding="10">
 						<tr>
 							<td>

@@ -35,7 +35,7 @@ public class RegistrationController {
 		return "registration";
 	}
 
-	@RequestMapping(path = "/newuser", method = RequestMethod.POST)
+	@RequestMapping(path = "/", method = RequestMethod.POST)
 	public String createNewUser(@Valid @ModelAttribute("registerUser") RegisterUser registerUser, BindingResult errors,
 			ModelMap modelMap, HttpServletRequest request) {
 		
