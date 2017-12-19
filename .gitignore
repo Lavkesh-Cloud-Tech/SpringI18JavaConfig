@@ -1,0 +1,39 @@
+# Build Artifacts
+.gradle/
+build/distributions/
+build/docs/
+build/libs/
+build/reports/
+build/resources/
+build/scripts/
+build/test-results/
+build/docker/*
+!build/docker/postgres/
+build/tmp
+build/classes
+target/
+bin/
+log/
+
+# Generated files for versioning
+
+# Eclipse Project Files
+
+.classpath
+.project
+.settings/
+**/classes
+**/WEB-INF/lib
+
+.springBeans
+
+# IntelliJ IDEA Files
+
+*.iml
+*.ipr
+*.iws
+*.idea
+/build
+/out
+
+*.log
