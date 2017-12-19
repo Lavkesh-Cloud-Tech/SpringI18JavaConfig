@@ -1,9 +1,12 @@
 package com.lavkesh.registration.validator;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -42,14 +45,18 @@ public class RegisterUserValidator implements Validator {
 			errors.rejectValue("confirmPassword", "error.register.confirmPasswordNotEqual");
 		}
 		
-		
-		Date dob = registerUser.getDob();
-		if(dob != null) {
-			Date currentDate = getCurrentDate();
-			
-			boolean currentOrFutureDate = dob.compareTo(currentDate) >= 0;
-			if(currentOrFutureDate) {
-				errors.rejectValue("dob", "future.dob");
+		String dob = registerUser.getDob() != null ? registerUser.getDob().trim() : "";
+		if(! StringUtils.isEmpty(dob)) {
+			Date dobDate = parseDate(dob);
+			if(dobDate == null) {
+				errors.rejectValue("dob", "invalid.dob");
+			} else {
+				Date currentDate = getCurrentDate();
+				
+				boolean currentOrFutureDate = dobDate.compareTo(currentDate) >= 0;
+				if(currentOrFutureDate) {
+					errors.rejectValue("dob", "future.dob");
+				}
 			}
 		}
 		
@@ -62,5 +69,15 @@ public class RegisterUserValidator implements Validator {
 		c1.set(Calendar.SECOND, 0);
 		c1.set(Calendar.MILLISECOND, 0);
 		return c1.getTime();
+	}
+	
+	private Date parseDate(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        dateFormat.setLenient(false);
+		try {
+			return dateFormat.parse(date);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 }

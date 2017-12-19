@@ -1,12 +1,7 @@
 package com.lavkesh.registration.model;
 
-import java.util.Date;
-
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class RegisterUser {
 
@@ -26,9 +21,8 @@ public class RegisterUser {
 	@Email
 	private String email;
 
-	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dob;
+	@NotEmpty
+	private String dob;
 
 	@NotEmpty
 	private String maritalStatus;
@@ -70,11 +64,11 @@ public class RegisterUser {
 		this.email = email;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 

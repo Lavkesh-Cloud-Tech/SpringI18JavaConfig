@@ -175,7 +175,7 @@
 							</td>
 							
 							<td>
-								<form:input path="dob" type="date"/>
+								<form:input path="dob" placeholder="dd-MMM-yyyy"/>
 							</td>
 							
 							<td>
